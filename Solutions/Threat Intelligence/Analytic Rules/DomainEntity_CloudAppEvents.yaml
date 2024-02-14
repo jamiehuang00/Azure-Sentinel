@@ -2,6 +2,20 @@ id: b97e118c-b7fa-42a6-84de-2e13443fbb8f
 name: Preview - TI map Domain entity to Cloud App Events
 description: |
     'We use threat intelligence to identify compromises and attacks and detect malicious activities in one's domain entity.'
+severity: Medium
+requiredDataConnectors:
+  - connectorId: MicrosoftThreatProtection
+    dataTypes:
+      - CloudAppEvents
+  - connectorId: MicrosoftDefenderThreatIntelligence
+    dataTypes:
+      - ThreatIntelligenceIndicator
+queryFrequency: 1h
+queryPeriod: 14d
+triggerOperator: gt
+triggerThreshold: 0
+tactics:
+  - Privilege Escalation
 query: |
   let dt_lookBack = 1h;
   let ioc_lookBack = 14d; 
@@ -37,4 +51,16 @@ query: |
       | summarize CloudAppEvents_TimeGenerated = argmax(CloudAppEvents_TimeGenerated, *) by IndicatorId
       | extend Description = max_CloudAppEvents_TimeGenerated_Description, ActivityGroupNames = max_CloudAppEvents_TimeGenerated_ActivityGroupNames, ThreatType = max_CloudAppEvents_TimeGenerated_ThreatType, ExpirationDateTime = max_CloudAppEvents_TimeGenerated_ExpirationDateTime, ConfidenceScore = max_CloudAppEvents_TimeGenerated_ConfidenceScore, DomainName = max_CloudAppEvents_TimeGenerated_DomainName, ProviderName = max_CloudAppEvents_TimeGenerated_IndicatorProvider, AlertSeverity = max_CloudAppEvents_TimeGenerated_ThreatSeverity, IPAddress = max_CloudAppEvents_TimeGenerated_IPAddress
       | project CloudAppEvents_TimeGenerated, Description, ActivityGroupNames, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, DomainName, ProviderName, AlertSeverity, IPAddress
+entityMappings:
+  - entityType: Account
+    fieldMappings:
+      - identifier: DisplayName
+        columnName: UserAddedName
+      - identifier: ObjectGuid
+        columnName: UserAddedObjectId
+      - identifier: ObjectGuid
+        columnName: PerformedByObjectId
+      - identifier: DisplayName
+        columnName: PerformedByDisplayName
 version: 1.0.0
+kind: Scheduled

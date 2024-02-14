@@ -11,10 +11,12 @@ requiredDataConnectors:
   - connectorId: 
     dataTypes:
       - SecurityAlert
+queryFrequency: 1h
+queryPeriod: 14d
+triggerOperator: gt
+triggerThreshold: 0
 tactics:
   - Privilege Escalation
-relevantTechniques:
-  - T1548
 query: |
   SecurityAlert
     | where TimeGenerated >= ago(30d)
@@ -41,3 +43,4 @@ entityMappings:
       - identifier: DisplayName
         columnName: PerformedByDisplayName
 version: 1.0.0
+kind: Scheduled

@@ -7,10 +7,12 @@ requiredDataConnectors:
   - connectorId: MicrosoftThreatProtection
     dataTypes:
       - CloudAppEvents
+queryFrequency: 1h
+queryPeriod: 14d
+triggerOperator: gt
+triggerThreshold: 0
 tactics:
   - Privilege Escalation
-relevantTechniques:
-  - T1548
 query: |
   CloudAppEvents
     | where ActionType in ("Update policy.", "Add policy.", "Remove-CrossTenantAccessPolicy", "Add policy to service principal.", "Write PolicyAssignments", "Update authorization policy.", "Delete policy.", "Add owner to policy.", "Write PolicyExemptions", "Remove-LabelPolicy")
@@ -29,3 +31,4 @@ entityMappings:
       - identifier: DisplayName
         columnName: PerformedByDisplayName
 version: 1.0.0
+kind: Scheduled
