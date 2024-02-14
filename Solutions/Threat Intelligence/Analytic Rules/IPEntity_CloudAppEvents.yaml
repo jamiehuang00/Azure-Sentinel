@@ -49,15 +49,15 @@ query: |
           EmailSourceIPAddress = max_CloudAppEvents_TimeGenerated_EmailSourceIpAddress
       | project CloudAppEventsTimeGenerated, Description, ActivityGroupNames, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore, TI_ipEntity, NetworkDestinationIP, NetworkSourceIP, EmailSourceIPAddress
 entityMappings:
-  - entityType: Account
+  - entityType: IP
     fieldMappings:
-      - identifier: DisplayName
-        columnName: UserAddedName
-      - identifier: ObjectGuid
-        columnName: UserAddedObjectId
-      - identifier: ObjectGuid
-        columnName: PerformedByObjectId
-      - identifier: DisplayName
-        columnName: PerformedByDisplayName
+      - identifier: Address
+      - columnName: TI_ipEntity
+      - identifier: Address
+      - columnName: NetworkDestinationIP
+      - identifier: Address
+      - columnName: NetworkSourceIP
+      - identifier: Address
+      - columnName: EmailSourceIPAddress
 version: 1.0.0
 kind: Scheduled

@@ -35,12 +35,12 @@ entityMappings:
   - entityType: Account
     fieldMappings:
       - identifier: DisplayName
-        columnName: UserAddedName
-      - identifier: ObjectGuid
-        columnName: UserAddedObjectId
-      - identifier: ObjectGuid
-        columnName: PerformedByObjectId
+        columnName: EntityName
+      - identifier: UPNSuffix
+        columnName: EntityUPNSuffix
       - identifier: DisplayName
-        columnName: PerformedByDisplayName
+        columnName: DisplayName
+      - identifier: IPAddress
+        columnName: IPAddress
 version: 1.0.0
 kind: Scheduled

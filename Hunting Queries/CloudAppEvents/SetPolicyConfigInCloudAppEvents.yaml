@@ -23,12 +23,10 @@ entityMappings:
   - entityType: Account
     fieldMappings:
       - identifier: DisplayName
-        columnName: UserAddedName
-      - identifier: ObjectGuid
-        columnName: UserAddedObjectId
-      - identifier: ObjectGuid
-        columnName: PerformedByObjectId
-      - identifier: DisplayName
-        columnName: PerformedByDisplayName
+        columnName: AccountDisplayName
+  - entityType: IP
+    fieldMappings:
+      - identifier: Address
+        columnName: IPAddress
 version: 1.0.0
 kind: Scheduled
